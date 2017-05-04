@@ -225,6 +225,7 @@ class ReactSortableTree extends Component {
     }
 
     startDrag({ path }) {
+        if (this.props.freeze) return;
         const draggingTreeData = removeNodeAtPath({
             treeData: this.props.treeData,
             path,
@@ -237,6 +238,7 @@ class ReactSortableTree extends Component {
     }
 
     dragHover({ node: draggedNode, depth, minimumTreeIndex }) {
+        if (this.props.freeze) return;
         const addedResult = memoizedInsertNode({
             treeData: this.state.draggingTreeData,
             newNode: draggedNode,
@@ -267,6 +269,7 @@ class ReactSortableTree extends Component {
     }
 
     endDrag(dropResult) {
+        if (this.props.freeze) return;
         if (!dropResult || !dropResult.node) {
             return this.setState({
                 draggingTreeData: null,
@@ -418,6 +421,7 @@ class ReactSortableTree extends Component {
             maxDepth,
             scaffoldBlockPxWidth,
             searchFocusOffset,
+            freeze,
         } = this.props;
         const TreeNodeRenderer    = this.treeNodeRenderer;
         const NodeContentRenderer = this.nodeContentRenderer;
@@ -468,6 +472,7 @@ class ReactSortableTree extends Component {
                     canDrag={rowCanDrag}
                     toggleChildrenVisibility={this.toggleChildrenVisibility}
                     scaffoldBlockPxWidth={scaffoldBlockPxWidth}
+                    freeze={freeze}
                     {...nodeProps}
                 />
             </TreeNodeRenderer>
@@ -564,6 +569,9 @@ ReactSortableTree.propTypes = {
     onVisibilityToggle: PropTypes.func,
 
     dndType: PropTypes.string,
+
+    // Prevent tree from rebuilding on dragging
+    freeze: PropTypes.bool
 };
 
 ReactSortableTree.defaultProps = {
@@ -577,6 +585,7 @@ ReactSortableTree.defaultProps = {
     searchQuery: null,
     isVirtualized: true,
     canDrag: true,
+    freeze: false
 };
 
 // Export the tree component without the react-dnd DragDropContext,
