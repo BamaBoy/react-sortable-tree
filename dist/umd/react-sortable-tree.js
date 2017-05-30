@@ -2171,7 +2171,7 @@
     function(module, exports, __webpack_require__) {
         exports = module.exports = __webpack_require__(2)(void 0), // imports
         // module
-        exports.push([ module.id, ".rst__tree{/*! This comment keeps Sass from deleting the empty rule */}.rst__virtualScrollOverride *{box-sizing:border-box}.ReactVirtualized__Grid__innerScrollContainer{overflow:visible!important}.ReactVirtualized__Grid{outline:none}", "" ]), 
+        exports.push([ module.id, ".rst__tree{/*! This comment keeps Sass from deleting the empty rule */}.rst__virtualScrollOverride{overflow:auto!important}.rst__virtualScrollOverride *{box-sizing:border-box}.ReactVirtualized__Grid__innerScrollContainer{overflow:visible!important}.ReactVirtualized__Grid{outline:none}", "" ]), 
         // exports
         exports.locals = {
             tree: "rst__tree",
